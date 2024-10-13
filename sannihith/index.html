@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <title>Halloween Quiz</title>
+    <style>
+        body {
+            background-image: url(spooky.jpg); 
+            background-size: cover;
+            color: #fff;
+            font-family: 'Creepster', cursive;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-top: 20px;
+        }
+
+        .quiz-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+
+        .question {
+            margin: 20px 0;
+            font-size: 1.5rem;
+        }
+
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .options li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        #submit-btn {
+            background-color: orange;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.8rem;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <h1>Spooky Halloween Quiz</h1>
+
+    <div class="quiz-container">
+        <div class="question" id="question1">
+            <p>1. What creature is said to rise from the dead on Halloween?</p>
+            <ul class="options">
+                <li onclick="selectOption(this, 'question1', 'Zombie')">A. Zombie</li>
+                <li onclick="selectOption(this, 'question1', 'Vampire')">B. Vampire</li>
+                <li onclick="selectOption(this, 'question1', 'Werewolf')">C. Werewolf</li>
+                <li onclick="selectOption(this, 'question1', 'Mummy')">D. Mummy</li>
+            </ul>
+        </div>
+
+        <div class="question" id="question2">
+            <p>2. Which animal is often associated with witches?</p>
+            <ul class="options">
+                <li onclick="selectOption(this, 'question2', 'Bat')">A. Bat</li>
+                <li onclick="selectOption(this, 'question2', 'Black Cat')">B. Black Cat</li>
+                <li onclick="selectOption(this, 'question2', 'Crow')">C. Crow</li>
+                <li onclick="selectOption(this, 'question2', 'Owl')">D. Owl</li>
+            </ul>
+        </div>
+
+        <div class="question" id="question3">
+            <p>3. What is the traditional color of pumpkins?</p>
+            <ul class="options">
+                <li onclick="selectOption(this, 'question3', 'Red')">A. Red</li>
+                <li onclick="selectOption(this, 'question3', 'Yellow')">B. Yellow</li>
+                <li onclick="selectOption(this, 'question3', 'Orange')">C. Orange</li>
+                <li onclick="selectOption(this, 'question3', 'Green')">D. Green</li>
+            </ul>
+        </div>
+
+        <button id="submit-btn" onclick="checkAnswers()">Submit Answers</button>
+        <div id="result"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Spooky Quiz Inc. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const answers = {
+            question1: 'Zombie',
+            question2: 'Black Cat',
+            question3: 'Orange'
+        };
+
+        const userAnswers = {};
+
+        function selectOption(element, question, answer) {
+            userAnswers[question] = answer;
+            const options = document.querySelectorAll(`#${question} .options li`);
+            options.forEach(option => option.style.backgroundColor = ''); // Reset styles
+            element.style.backgroundColor = 'rgba(255, 165, 0, 0.5)'; // Highlight selected option
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            Object.keys(answers).forEach(question => {
+                if (userAnswers[question] === answers[question]) {
+                    score++;
+                }
+            });
+
+            document.getElementById('result').innerText = `You got ${score} out of 3 correct!`;
+        }
+    </script>
+</body>
+</html>
